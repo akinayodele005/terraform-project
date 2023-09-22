@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('git Checkout') {
+            steps {
+                git credentialsId: 'festus', url: 'https://github.com/akinayodele005/terraform-project'
+            }
+        }
+        stage('Terraform init') {
+            steps {
+                sh '''terraform init'''
+            }
+        }
+        stage('Terraform apply') {
+            steps {
+                sh '''Terraform apply --auto-approve'''
+            }
+        }
+        
+    }
+}
